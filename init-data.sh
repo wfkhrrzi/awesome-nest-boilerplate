@@ -7,5 +7,5 @@ if [ -n "${DB_USERNAME:-}" ] && [ -n "${DB_PASSWORD:-}" ]; then
 		GRANT ALL PRIVILEGES ON DATABASE ${DB_DATABASE} TO ${DB_USERNAME};
 	EOSQL
 else
-	echo "SETUP INFO: No Environment variables given!"
+    echo "SETUP INFO: No Environment variables given!"
 fi

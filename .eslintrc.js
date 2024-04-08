@@ -34,6 +34,7 @@ module.exports = {
         'promise',
         'canonical',
         'n',
+        "unused-imports",
     ],
     rules: {
         '@typescript-eslint/no-unsafe-assignment': 'off',
@@ -81,6 +82,16 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': [
             'error',
             { argsIgnorePattern: '^_' },
+        ],
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "varsIgnorePattern": "^_",
+                "args": "after-used",
+                "argsIgnorePattern": "^_",
+            },
         ],
         '@typescript-eslint/adjacent-overload-signatures': 'error',
         'max-params': ['error', 7],

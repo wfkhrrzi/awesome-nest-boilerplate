@@ -3,6 +3,7 @@ import {
   HttpStatus,
   UnprocessableEntityException,
   ValidationPipe,
+  VersioningType,
 } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
@@ -18,13 +19,11 @@ import { initializeTransactionalContext } from 'typeorm-transactional';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './filters/bad-request.filter';
 import { QueryFailedFilter } from './filters/query-failed.filter';
-import { TranslationInterceptor } from './interceptors/translation-interceptor.service';
 import { setupSwagger } from './setup-swagger';
 import { ApiConfigService } from './shared/services/api-config.service';
-import { TranslationService } from './shared/services/translation.service';
 import { SharedModule } from './shared/shared.module';
 
-export async function bootstrap(): Promise<NestExpressApplication> {
+const bootstrap = async () => {
   initializeTransactionalContext();
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
@@ -36,7 +35,10 @@ export async function bootstrap(): Promise<NestExpressApplication> {
   // app.setGlobalPrefix('/api'); use api as global prefix if you don't have subdomain
   app.use(compression());
   app.use(morgan('combined'));
-  app.enableVersioning();
+  app.enableVersioning({
+    defaultVersion: '1',
+    type: VersioningType.URI,
+  });
 
   const reflector = app.get(Reflector);
 
@@ -45,12 +47,7 @@ export async function bootstrap(): Promise<NestExpressApplication> {
     new QueryFailedFilter(reflector),
   );
 
-  app.useGlobalInterceptors(
-    new ClassSerializerInterceptor(reflector),
-    new TranslationInterceptor(
-      app.select(SharedModule).get(TranslationService),
-    ),
-  );
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -93,6 +90,6 @@ export async function bootstrap(): Promise<NestExpressApplication> {
   console.info(`server running on ${await app.getUrl()}`);
 
   return app;
-}
+};
 
 void bootstrap();

@@ -21,7 +21,8 @@
     "skipLibCheck": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "strict": true
+    "strict": true,
+    "moduleResolution": "node",
   },
   "include": [
     "src/**/*"

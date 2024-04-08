@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types,@typescript-eslint/no-unsafe-argument */
-import { type Type } from '@nestjs/common';
-import { applyDecorators, UseInterceptors } from '@nestjs/common';
+import { applyDecorators, type Type, UseInterceptors } from '@nestjs/common';
 import {
   PARAMTYPES_METADATA,
   ROUTE_ARGS_METADATA,
@@ -47,6 +46,7 @@ function explore(instance: Object, propertyKey: string | symbol) {
   for (const [key, value] of Object.entries(parametersWithType)) {
     const keyPair = key.split(':');
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
     if (Number(keyPair[0]) === RouteParamtypes.BODY) {
       return value.type;
     }

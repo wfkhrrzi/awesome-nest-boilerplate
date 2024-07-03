@@ -1,9 +1,9 @@
 # Nestjs Awesome Boilerplate 
 
 ## Prerequisite
-[Nodejs 18](https://github.com/nvm-sh/nvm)
-[Docker + Docker Compose](https://github.com/docker/docker-install)
-[Yarn] `npm i -g yarn`
+- [Nodejs 18 above](https://github.com/nvm-sh/nvm)
+- [Docker + Docker Compose](https://github.com/docker/docker-install)
+- [Yarn] `npm i -g yarn`
 
 ## Getting started
 

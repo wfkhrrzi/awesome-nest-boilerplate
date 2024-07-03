@@ -8,16 +8,19 @@
 ## Getting started
 
 ```bash
-# 1. Enter your newly-cloned folder.
-cd botv2-api
+# 1. Clone this project
+git clone https://github.com/jackgoh/awesome-nest-boilerplate {your project name}
 
-# 2. Create Environment variables file.
+# 2. Enter your newly-cloned folder.
+cd your-project-name
+
+# 3. Create Environment variables file.
 cp .env.example .env
 
-# 3. Install dependencies. (Make sure yarn is installed: https://yarnpkg.com/lang/en/docs/install)
+# 4. Install dependencies. (Make sure yarn is installed: https://yarnpkg.com/lang/en/docs/install)
 yarn
 
-# 4. Run DB
+# 5. Run DB
 docker compose up
 ```
 
